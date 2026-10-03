@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Carding.in — practical technology, software, AI tools and how-to guides.">
+  <title>Carding.in — Practical Technology, Clearly Explained</title>
+  <style>
+    :root{--ink:#172033;--muted:#687286;--line:#e6e9ef;--blue:#1769e8;--bg:#f8fafc;--teal:#1a8b91}
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:#fff}
+    a{text-decoration:none;color:inherit}.top{background:#10264b;color:#fff;padding:7px 24px;font-size:12px;display:flex;justify-content:space-between}
+    header{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:10}
+    .nav{max-width:1180px;margin:auto;min-height:76px;display:flex;align-items:center;gap:28px;padding:12px 20px}
+    .logo{font-family:Georgia,serif;font-size:28px;font-weight:700;margin-right:auto}
+    .links{display:flex;gap:20px;font-size:14px;font-weight:600}.links a:hover{color:var(--blue)}
+    .search{width:190px;padding:11px 13px;border:1px solid var(--line);border-radius:9px;outline:0}.search:focus{border-color:var(--blue)}
+    .wrap{max-width:1180px;margin:auto;padding:0 20px}
+    .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:center;padding:70px 0 45px}
+    .eyebrow{font-size:12px;letter-spacing:2px;color:var(--teal);font-weight:800;text-transform:uppercase}
+    h1{font:700 48px/1.08 Georgia,serif;margin:14px 0}.lead{font-size:17px;line-height:1.6;color:var(--muted);max-width:650px}
+    .btn{display:inline-block;background:var(--blue);color:white;padding:13px 18px;border-radius:7px;font-weight:700;margin-top:12px}
+    .hero-art{height:310px;border-radius:20px;background:linear-gradient(135deg,#183a7b,#2766d4);position:relative;overflow:hidden}
+    .hero-art:before{content:"";position:absolute;width:220px;height:220px;border:55px solid rgba(255,255,255,.13);border-radius:50%;left:70px;top:45px}
+    .signal{position:absolute;left:28%;bottom:45px;background:#10264b;color:#fff;border-radius:12px;padding:17px 22px;width:55%;font-size:11px}
+    .signal b{display:block;margin-bottom:10px}.bar{height:4px;background:#48d2df;border-radius:8px;width:65%}
+    .notice{background:#eef8fb;border-left:3px solid #42b8c1;padding:14px 18px;margin-top:25px;border-radius:0 9px 9px 0;color:#425466}
+    section{padding:45px 0}.section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:20px}
+    h2{font:700 27px Georgia,serif;margin:6px 0}.desc{color:var(--muted);font-size:14px}
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.card{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+    .thumb{height:120px;background:linear-gradient(135deg,#263f9b,#6574df);position:relative}.thumb:after{content:"";position:absolute;width:120px;height:120px;border:30px solid rgba(255,255,255,.14);border-radius:50%;right:20px;top:-45px}
+    .thumb.teal{background:linear-gradient(135deg,#17645e,#31a7a0)}.thumb.purple{background:linear-gradient(135deg,#48356d,#b84f91)}
+    .card-body{padding:17px}.tag{font-size:11px;letter-spacing:1.5px;color:#37639e;font-weight:800;text-transform:uppercase}
+    h3{font:700 18px/1.25 Georgia,serif;margin:8px 0}.meta{font-size:12px;color:#7a8494;line-height:1.5}.read{display:inline-block;margin-top:10px;color:#1769e8;font-size:12px;font-weight:800}
+    .lower{display:grid;grid-template-columns:1fr 300px;gap:45px}.list-section{border-top:1px solid var(--line);padding:28px 0}
+    .two{display:grid;grid-template-columns:1fr 1fr;gap:30px}.simple h3{font-size:16px}.simple p{color:var(--muted);font-size:13px;line-height:1.5}
+    .sidebox{border:1px solid var(--line);border-radius:12px;padding:20px;margin-bottom:18px}.sidebox ol{margin:10px 0 0;padding-left:25px;color:#4e596b}.sidebox li{padding:8px 0;font-size:13px}
+    .newsletter{background:linear-gradient(135deg,#173b7c,#245fbe);color:#fff;border-radius:16px;padding:35px;margin:35px 0 50px}.newsletter p{color:#d9e4fb}.form{display:flex;max-width:600px}.form input{flex:1;padding:13px;border:0;border-radius:7px 0 0 7px}.form button{border:0;padding:0 20px;border-radius:0 7px 7px 0;font-weight:700}
+    footer{border-top:1px solid var(--line);padding:35px 0;color:#687286}.foot{display:flex;justify-content:space-between;gap:30px}.foot strong{font-family:Georgia,serif;color:var(--ink);font-size:20px}.copy{font-size:12px;margin-top:30px}
+    @media(max-width:850px){.nav{flex-wrap:wrap;gap:14px}.links{order:3;width:100%;overflow:auto;padding-bottom:4px}.search{width:150px}.hero{grid-template-columns:1fr;padding-top:40px}h1{font-size:38px}.lower{grid-template-columns:1fr}.sidebox{display:none}}
+    @media(max-width:600px){.top{font-size:10px;padding:6px 12px}.wrap{padding:0 14px}.nav{padding:10px 14px}.logo{font-size:24px}.grid,.two{grid-template-columns:1fr}.hero-art{height:240px}.hero{gap:25px}.form{display:block}.form input,.form button{width:100%;height:44px;border-radius:7px}.form button{margin-top:8px}.foot{display:block}.foot div+div{margin-top:20px}}
+  </style>
+</head>
+<body>
+  <div class="top"><span>Practical technology, clearly explained.</span><span>Independent technology journal</span></div>
+  <header>
+    <nav class="nav">
+      <a class="logo" href="#">carding.in</a>
+      <div class="links">
+        <a href="#">Home</a><a href="#android">Android</a><a href="#software">Software</a><a href="#ai">AI Tools</a><a href="#howto">How-To</a><a href="#web">Web & Internet</a>
+      </div>
+      <input id="search" class="search" type="search" placeholder="Search articles">
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Featured analysis</div>
+        <h1>The quieter, smarter way to build your everyday tech stack</h1>
+        <p class="lead">Practical guides for choosing tools, improving your devices, and getting more done without unnecessary complexity.</p>
+        <a class="btn" href="#latest">Read featured story →</a>
+        <div class="notice"><b>Worth watching</b><br>Small privacy choices now can make your next device setup much calmer.</div>
+      </div>
+      <div class="hero-art"><div class="signal"><b>TECH SIGNAL</b><div class="bar"></div></div></div>
+    </section>
+
+    <section id="latest">
+      <div class="section-head"><div><div class="eyebrow">Fresh reading</div><h2>Latest articles</h2></div><div class="desc">Useful perspectives and actionable guides for your devices, apps, and online life.</div></div>
+      <div class="grid">
+        <article class="card" data-search="ai tools focused work">
+          <div class="thumb"></div><div class="card-body"><div class="tag">AI Tools</div><h3>Five AI tools that support focused work without taking over your day</h3><div class="meta">AI Tools · 6 min read</div><a class="read" href="#">Explore AI tools</a></div>
+        </article>
+        <article class="card" data-search="android privacy settings">
+          <div class="thumb teal"></div><div class="card-body"><div class="tag">Android</div><h3>Six Android privacy settings worth checking today</h3><div class="meta">Android · 5 min read</div><a class="read" href="#">Read Android guide</a></div>
+        </article>
+        <article class="card" data-search="software remote team">
+          <div class="thumb"></div><div class="card-body"><div class="tag">Software</div><h3>How to choose software your remote team will actually use</h3><div class="meta">Software · 7 min read</div><a class="read" href="#">Read software guide</a></div>
+        </article>
+        <article class="card" data-search="web internet browser">
+          <div class="thumb teal"></div><div class="card-body"><div class="tag">Web & Internet</div><h3>A beginner’s reset for a faster, tidier browser</h3><div class="meta">How-To · 4 min read</div><a class="read" href="#">Speed up your browser</a></div>
+        </article>
+        <article class="card" data-search="security passwords">
+          <div class="thumb purple"></div><div class="card-body"><div class="tag">Security</div><h3>Build stronger passwords with a simpler system</h3><div class="meta">Security · 6 min read</div><a class="read" href="#">Protect your accounts</a></div>
+        </article>
+        <article class="card" data-search="productivity desktop apps">
+          <div class="thumb purple"></div><div class="card-body"><div class="tag">Productivity</div><h3>A low-maintenance system for organising desktop apps</h3><div class="meta">Software · 5 min read</div><a class="read" href="#">Organise your apps</a></div>
+        </article>
+      </div>
+    </section>
+
+    <div class="lower">
+      <div>
+        <section id="android" class="list-section"><div class="section-head"><div><div class="eyebrow">Device know-how</div><h2>Android</h2></div><a class="read" href="#">View all Android</a></div><div class="two"><div class="simple"><div class="tag">Android</div><h3>Make your Android home screen more useful in ten minutes</h3><p>A calmer layout starts with fewer decisions and better app grouping.</p></div><div class="simple"><div class="tag">Android</div><h3>The small battery settings that make a real difference</h3><p>Understand background activity before reaching for a battery-saving app.</p></div></div></section>
+        <section id="software" class="list-section"><div class="section-head"><div><div class="eyebrow">Better workflows</div><h2>Software</h2></div><a class="read" href="#">View all software</a></div><div class="two"><div class="simple"><div class="tag">Software</div><h3>Choose a shared workspace without creating another digital mess</h3><p>Three questions to ask before moving your team’s files and conversations.</p></div><div class="simple"><div class="tag">Software</div><h3>A sensible approach to backups for everyday work</h3><p>Build a dependable backup habit with clear priorities and fewer moving parts.</p></div></div></section>
+        <section id="ai" class="list-section"><div class="section-head"><div><div class="eyebrow">Useful intelligence</div><h2>AI Tools</h2></div><a class="read" href="#">View all AI tools</a></div><div class="two"><div class="simple"><div class="tag">AI Tools</div><h3>Use AI for first drafts, not final judgment</h3><p>A practical way to retain your voice and improve the quality of AI-assisted work.</p></div><div class="simple"><div class="tag">AI Tools</div><h3>What to keep out of an AI prompt</h3><p>A plain-language checklist for sharing context without oversharing sensitive details.</p></div></div></section>
+        <section id="howto" class="list-section"><div class="section-head"><div><div class="eyebrow">Step by step</div><h2>How-To</h2></div><a class="read" href="#">View all guides</a></div><div class="two"><div class="simple"><div class="tag">How-To</div><h3>Create a password routine you can keep using</h3><p>Make account protection feel routine with a manageable monthly check-in.</p></div><div class="simple"><div class="tag">How-To</div><h3>Reduce browser tab overload without losing useful pages</h3><p>Sort what needs action now, what deserves reading later, and what can go.</p></div></div></section>
+      </div>
+      <aside>
+        <div class="sidebox"><div class="eyebrow">Reader favourites</div><h2>Popular posts</h2><ol><li>The low-stress guide to a more private smartphone</li><li>Android settings to review before you install another app</li><li>How to make AI assistance fit your real workflow</li></ol></div>
+        <div class="sidebox"><div class="eyebrow">Browse topics</div><h2>Categories</h2><p>Android · 18</p><p>Software · 24</p><p>AI Tools · 16</p><p>How-To · 31</p></div>
+      </aside>
+    </div>
+
+    <section class="newsletter"><div class="eyebrow">The carding.in note</div><h2>Good technology reading, once a week</h2><p>A considered roundup of practical tools, useful guides, and digital habits worth your time.</p><form class="form" onsubmit="event.preventDefault();alert('Thanks! Newsletter signup will be connected later.');"><input type="email" placeholder="Your email address" required><button>Subscribe</button></form></section>
+  </main>
+
+  <footer><div class="wrap foot"><div><strong>carding.in</strong><p>Tech guides and useful explanations for everyday digital life.</p></div><div><b>Company</b><p>About<br>Contact<br>Privacy Policy</p></div><div id="web"><b>Explore</b><p>AI Tools<br>Android<br>Disclaimer</p></div></div><div class="wrap copy">© 2026 carding.in. Practical technology, clearly explained.</div></footer>
+
+  <script>
+    const search = document.getElementById('search');
+    const cards = [...document.querySelectorAll('.card')];
+    search.addEventListener('input', () => {
+      const q = search.value.toLowerCase().trim();
+      cards.forEach(c => c.style.display = !q || c.dataset.search.includes(q) || c.innerText.toLowerCase().includes(q) ? '' : 'none');
+    });
+  </script>
+</body>
+</html>

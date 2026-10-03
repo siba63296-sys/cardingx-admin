@@ -1,0 +1,18 @@
+name = "cardingx-blog"
+main = "src/worker.js"
+compatibility_date = "2026-10-02"
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+run_worker_first = ["/api/*", "/admin*"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "carding_blog_db"
+database_id = "da5c72f9-16bd-4518-a250-d780af17dbd5"
+
+# Optional: enable this only if you want direct image uploads to R2.
+# [[r2_buckets]]
+# binding = "MEDIA"
+# bucket_name = "REPLACE_WITH_YOUR_R2_BUCKET_NAME"

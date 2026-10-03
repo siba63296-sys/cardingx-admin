@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CardingX Admin</title>
+<style>
+:root{--bg:#f6f8fb;--card:#fff;--ink:#172033;--muted:#687286;--line:#e4e8ef;--blue:#1769e8;--danger:#c93535}*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Arial,sans-serif;color:var(--ink)}button,input,textarea,select{font:inherit}.shell{max-width:1180px;margin:auto;padding:20px}.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}.brand{font:bold 24px Georgia}.btn{border:0;border-radius:8px;padding:10px 15px;background:var(--blue);color:#fff;font-weight:700;cursor:pointer}.btn.secondary{background:#edf2f8;color:var(--ink)}.btn.danger{background:#fff0f0;color:var(--danger)}.grid{display:grid;grid-template-columns:330px 1fr;gap:18px}.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 2px 12px #13203a0a}.login{max-width:420px;margin:10vh auto}.field{margin-bottom:14px}.field label{display:block;font-weight:700;font-size:13px;margin-bottom:6px}.field input,.field textarea,.field select{width:100%;padding:11px;border:1px solid var(--line);border-radius:8px;background:#fff}.field textarea{min-height:280px;resize:vertical}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.post{border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:10px}.post h3{margin:0 0 5px;font:700 17px Georgia}.meta{font-size:12px;color:var(--muted)}.row{display:flex;gap:8px;align-items:center;justify-content:space-between}.badge{font-size:11px;padding:4px 7px;border-radius:20px;background:#eef2f7}.badge.published{background:#e6f7ed;color:#176b3a}.notice{padding:10px 12px;border-radius:8px;background:#eef5ff;margin-bottom:14px;font-size:13px}.hidden{display:none}.title{font:700 25px Georgia;margin:0 0 15px}.small{font-size:12px;color:var(--muted)}@media(max-width:800px){.grid{grid-template-columns:1fr}.shell{padding:12px}}
+</style>
+</head>
+<body>
+<div id="login" class="login card">
+  <div class="brand">cardingx.in / admin</div><p class="small">Admin login</p>
+  <form id="loginForm"><div class="field"><label>Password</label><input id="password" type="password" autocomplete="current-password" required></div><button class="btn" style="width:100%">Login</button></form>
+  <p id="loginMsg" class="small"></p>
+</div>
+<div id="app" class="shell hidden">
+  <div class="topbar"><div><div class="brand">cardingx.in Admin</div><div class="small">Posts & publishing</div></div><button id="logout" class="btn secondary">Logout</button></div>
+  <div class="grid">
+    <aside class="card"><div class="title">Posts</div><div class="toolbar"><button id="newBtn" class="btn">+ New Post</button><button id="refreshBtn" class="btn secondary">Refresh</button></div><div id="posts"></div></aside>
+    <main class="card">
+      <div class="title" id="editorTitle">New Post</div><div id="msg"></div>
+      <form id="postForm">
+        <input type="hidden" id="postId">
+        <div class="field"><label>Title</label><input id="title" required maxlength="180"></div>
+        <div class="field"><label>Category</label><select id="category"><option>AI Tools</option><option>Android</option><option>Software</option><option>How-To</option><option>Web & Internet</option><option>Security</option><option>Productivity</option><option>General</option></select></div>
+        <div class="field"><label>Image URL</label><input id="image" placeholder="https://..."><div class="small">For now use an image URL. R2 upload can be enabled later.</div></div>
+        <div class="field"><label>Content</label><textarea id="content" required placeholder="Write the article here..."></textarea></div>
+        <div class="field"><label>Status</label><select id="status"><option value="draft">Draft</option><option value="published">Published</option></select></div>
+        <div class="toolbar"><button class="btn" type="submit">Save Post</button><button id="clearBtn" class="btn secondary" type="button">Clear</button></div>
+      </form>
+    </main>
+  </div>
+</div>
+<script>
+const $=id=>document.getElementById(id);let posts=[];
+async function req(url,opts={}){const r=await fetch(url,opts);const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.error||'Request failed');return d}
+function showApp(){ $('login').classList.add('hidden');$('app').classList.remove('hidden');loadPosts() }
+async function check(){try{const d=await req('/api/me');d.authenticated?showApp():$('login').classList.remove('hidden')}catch{}}
+$('loginForm').onsubmit=async e=>{e.preventDefault();$('loginMsg').textContent='';try{await req('/api/login',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({password:$('password').value})});showApp()}catch(x){$('loginMsg').textContent=x.message}}
+$('logout').onclick=async()=>{await req('/api/logout',{method:'POST'});location.reload()};
+async function loadPosts(){posts=await req('/api/posts');$('posts').innerHTML=posts.map(p=>`<div class="post"><div class="row"><h3>${esc(p.title)}</h3><span class="badge ${p.status==='published'?'published':''}">${p.status}</span></div><div class="meta">${esc(p.category)} · ${new Date(p.updated_at).toLocaleString()}</div><div class="toolbar" style="margin-top:8px"><button class="btn secondary" onclick="editPost(${p.id})">Edit</button><button class="btn danger" onclick="deletePost(${p.id})">Delete</button></div></div>`).join('')||'<div class="small">No posts yet.</div>'}
+function esc(s){return String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
+window.editPost=id=>{const p=posts.find(x=>x.id===id);if(!p)return;$('postId').value=p.id;$('title').value=p.title;$('category').value=p.category;$('image').value=p.image_url||'';$('content').value=p.content;$('status').value=p.status;$('editorTitle').textContent='Edit Post'};
+window.deletePost=async id=>{if(!confirm('Delete this post?'))return;await req('/api/posts/'+id,{method:'DELETE'});loadPosts();clearForm()};
+function clearForm(){$('postId').value='';$('title').value='';$('image').value='';$('content').value='';$('status').value='draft';$('editorTitle').textContent='New Post'}
+$('newBtn').onclick=clearForm;$('clearBtn').onclick=clearForm;$('refreshBtn').onclick=loadPosts;
+$('postForm').onsubmit=async e=>{e.preventDefault();$('msg').innerHTML='<div class="notice">Saving...</div>';const id=$('postId').value;const body={title:$('title').value,category:$('category').value,image_url:$('image').value,content:$('content').value,status:$('status').value};try{await req(id?'/api/posts/'+id:'/api/posts',{method:id?'PUT':'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)});$('msg').innerHTML='<div class="notice">Saved successfully.</div>';clearForm();loadPosts()}catch(x){$('msg').innerHTML='<div class="notice">'+esc(x.message)+'</div>'}};
+check();
+</script>
+</body></html>
