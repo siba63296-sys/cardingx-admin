@@ -1,5 +1,5 @@
 name = "cardingx-blog"
-main = src/worker.js
+main = "worker.js"
 compatibility_date = "2026-10-02"
 
 [assets]
